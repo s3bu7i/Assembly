@@ -1,0 +1,89 @@
+
+//print integer syscall (service number 1):
+.data
+msg: .asciiz "Enter an integer: "
+result: .asciiz "You entered: "
+
+.text
+.globl main
+main:
+    li $v0, 4        # Print string syscall
+    la $a0, msg      # Load address of msg into $a0
+    syscall          # Call syscall
+
+    li $v0, 5        # Read integer syscall
+    syscall          # Call syscall
+    move $t0, $v0    # Move user input from $v0 to $t0
+
+    li $v0, 4        # Print string syscall
+    la $a0, result   # Load address of result into $a0
+    syscall          # Call syscall
+
+    li $v0, 1        # Print integer syscall
+    move $a0, $t0    # Move user input from $t0 to $a0
+    syscall          # Call syscall
+
+    li $v0, 10       # Exit syscall
+    syscall          # Call syscall
+//print string syscall (service number 4):
+.data
+msg: .asciiz "Hello, world!"
+
+.text
+.globl main
+main:
+    li $v0, 4        # Print string syscall
+    la $a0, msg      # Load address of msg into $a0
+    syscall          # Call syscall
+
+    li $v0, 10       # Exit syscall
+    syscall          # Call syscall
+//read integer syscall (service number 5):
+.data
+msg: .asciiz "Enter an integer: "
+result: .asciiz "You entered: "
+
+.text
+.globl main
+main:
+    li $v0, 4        # Print string syscall
+    la $a0, msg      # Load address of msg into $a0
+    syscall          # Call syscall
+
+    li $v0, 5        # Read integer syscall
+    syscall          # Call syscall
+    move $t0, $v0    # Move user input from $v0 to $t0
+
+    li $v0, 4        # Print string syscall
+    la $a0, result   # Load address of result into $a0
+    syscall          # Call syscall
+
+    li $v0, 1        # Print integer syscall
+    move $a0, $t0    # Move user input from $t0 to $a0
+    syscall          # Call syscall
+
+    li $v0, 10       # Exit syscall
+    syscall          # Call syscall
+//read string syscall (service number 8):
+.data
+msg: .asciiz "Enter your name: "
+result: .asciiz "Hello, "
+
+.text
+.globl main
+main:
+    li $v0, 4        # Print string syscall
+    la $a0, msg      # Load address of msg into $a0
+    syscall          # Call syscall
+
+    li $v0, 8        # Read string syscall
+    la $a0, result   # Load address of result into $a0
+    li $a1, 20       # Maximum length of string to read
+    syscall          # Call syscall
+
+    li $v0, 4        # Print string syscall
+    move $a0, $t0    # Move address of user input from $t0 to $a0
+    syscall          # Call syscall
+
+    li $v0, 10       # Exit syscall
+    syscall          # Call syscall
